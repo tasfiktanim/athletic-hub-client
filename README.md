@@ -1,4 +1,4 @@
-# Project Name
+athletic-hub
 
 ## 📌 Overview
 A short description about the project and its purpose.
