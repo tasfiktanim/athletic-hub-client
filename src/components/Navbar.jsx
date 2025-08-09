@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import { useState, useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthProvider';
@@ -18,97 +17,72 @@ const Navbar = () => {
     }
   };
 
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? 'text-yellow-400 font-semibold'
+      : 'hover:text-yellow-300';
+
+  const mobileNavLinkClass = ({ isActive }) =>
+    isActive
+      ? 'block px-3 py-2 rounded bg-yellow-400 font-semibold'
+      : 'block px-3 py-2 rounded hover:bg-yellow-300';
+
   return (
     <nav className="bg-blue-700 text-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
 
+          {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-2xl font-bold tracking-wide hover:text-yellow-400">
               AthleticHub
             </Link>
           </div>
 
+          {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? 'text-yellow-400 font-semibold' : 'hover:text-yellow-300'
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/hubs"
-              className={({ isActive }) =>
-                isActive ? 'text-yellow-400 font-semibold' : 'hover:text-yellow-300'
-              }
-            >
-              Events
-            </NavLink>
+            <NavLink to="/" className={navLinkClass}>Home</NavLink>
+            <NavLink to="/hubs" className={navLinkClass}>Events</NavLink>
 
-            {!user && (
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? 'text-yellow-400 font-semibold' : 'hover:text-yellow-300'
-                }
-              >
-                Login
-              </NavLink>
-            )}
+            {user ? (
+              <>
+                <NavLink to="/create-event" className={navLinkClass}>Book Event</NavLink>
+                <NavLink to="/myBookings" className={navLinkClass}>My Bookings</NavLink>
+                <NavLink to="/manageEvents" className={navLinkClass}>Manage Events</NavLink>
 
-            {user && (
-              <div
-                className="relative"
-                onMouseEnter={() => setProfileDropdown(true)}
-                onMouseLeave={() => setProfileDropdown(false)}
-              >
-                <img
-                  src={user.photoURL || '/default-profile.png'}
-                  alt={user.displayName || 'User'}
-                  title={user.displayName || ''}
-                  className="h-10 w-10 rounded-full cursor-pointer border-2 border-yellow-400"
-                />
-
-                {profileDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg py-2 z-50">
-                    <p className="px-4 py-1 font-semibold border-b border-gray-300">
-                      {user.displayName || user.email}
-                    </p>
-                    <Link
-                      to="/create-event"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setProfileDropdown(false)}
-                    >
-                      Book Event
-                    </Link>
-                    <Link
-                      to="/myBookings"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setProfileDropdown(false)}
-                    >
-                      My Bookings
-                    </Link>
-                    <Link
-                      to="/manageEvents"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={() => setProfileDropdown(false)}
-                    >
-                      Manage Events
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
+                {/* Profile Picture & Logout */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setProfileDropdown(true)}
+                  onMouseLeave={() => setProfileDropdown(false)}
+                >
+                  <img
+                    src={user.photoURL || '/default-profile.png'}
+                    alt={user.displayName || 'User'}
+                    title={user.displayName || ''}
+                    className="h-10 w-10 rounded-full cursor-pointer border-2 border-yellow-400"
+                  />
+                  {profileDropdown && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg py-2 z-50">
+                      <p className="px-4 py-1 font-semibold border-b border-gray-300">
+                        {user.displayName || user.email}
+                      </p>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <NavLink to="/login" className={navLinkClass}>Login</NavLink>
             )}
           </div>
 
+          {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -129,62 +103,17 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-blue-600 text-white px-2 pt-2 pb-4 space-y-1">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? 'block px-3 py-2 rounded bg-yellow-400 font-semibold' : 'block px-3 py-2 rounded hover:bg-yellow-300'
-            }
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/events"
-            className={({ isActive }) =>
-              isActive ? 'block px-3 py-2 rounded bg-yellow-400 font-semibold' : 'block px-3 py-2 rounded hover:bg-yellow-300'
-            }
-            onClick={() => setMenuOpen(false)}
-          >
-            Events
-          </NavLink>
+          <NavLink to="/" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/hubs" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Events</NavLink>
 
-          {!user && (
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                isActive ? 'block px-3 py-2 rounded bg-yellow-400 font-semibold' : 'block px-3 py-2 rounded hover:bg-yellow-300'
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              Login
-            </NavLink>
-          )}
-
-          {user && (
+          {user ? (
             <>
-              <Link
-                to="/create-event"
-                className="block px-3 py-2 rounded hover:bg-yellow-300"
-                onClick={() => setMenuOpen(false)}
-              >
-                Book Event
-              </Link>
-              <Link
-                to="/myBookings"
-                className="block px-3 py-2 rounded hover:bg-yellow-300"
-                onClick={() => setMenuOpen(false)}
-              >
-                My Bookings
-              </Link>
-              <Link
-                to="/manageEvents"
-                className="block px-3 py-2 rounded hover:bg-yellow-300"
-                onClick={() => setMenuOpen(false)}
-              >
-                Manage Events
-              </Link>
+              <NavLink to="/create-event" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Book Event</NavLink>
+              <NavLink to="/myBookings" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>My Bookings</NavLink>
+              <NavLink to="/manageEvents" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Manage Events</NavLink>
               <button
                 onClick={() => {
                   handleLogout();
@@ -195,6 +124,8 @@ const Navbar = () => {
                 Logout
               </button>
             </>
+          ) : (
+            <NavLink to="/login" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Login</NavLink>
           )}
         </div>
       )}
