@@ -28,11 +28,13 @@ const Hubs = () => {
   if (error) return <div className="text-red-500 text-center mt-8">{error}</div>;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">    
+    <div className="max-w-7xl mx-auto px-4 py-8">    
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
         Featured Hubs
       </h2>
-      <div className="grid md:grid-cols-3 gap-6">
+
+      {/* Uniform card size grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {hubs.map(hub => (
           <EventCard key={hub._id} event={hub} />
         ))}

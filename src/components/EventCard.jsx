@@ -23,7 +23,9 @@ const EventCard = ({ event }) => {
   const displayDate = eventDate || date;
 
   return (
-    <div className="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+    <div className="flex flex-col rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-all duration-300 h-[420px]">
+      
+      {/* Image */}
       <div className="w-full h-48 bg-gray-100 overflow-hidden">
         <img
           src={optimizedImageUrl}
@@ -36,34 +38,39 @@ const EventCard = ({ event }) => {
         />
       </div>
 
-      <div className="p-4 flex-grow">
-        <h2 className="text-xl font-bold text-gray-800">{title || eventName}</h2>
-        <p className="text-sm text-gray-500 mt-1">
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-grow">
+        <h2 className="text-lg font-bold text-gray-800 mb-1">
+          {title || eventName}
+        </h2>
+        <p className="text-sm text-gray-500">
           {category} {location && `• ${location}`}
         </p>
         {displayDate && (
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-xs text-gray-600 mt-1">
             {new Date(displayDate).toLocaleDateString('en-US', {
               year: 'numeric',
-              month: 'long',
+              month: 'short',
               day: 'numeric'
             })}
           </p>
         )}
         {description && (
-          <p className="text-gray-600 mt-2 line-clamp-2">
+          <p className="text-sm text-gray-600 mt-2 line-clamp-2">
             {description}
           </p>
         )}
-      </div>
-      <div className="p-4">
+
+        {/* Spacer pushes button to bottom */}
+        <div className="flex-grow" />
+
+        {/* Button */}
         <Link
           to={event.eventName ? `/events/${_id}` : `/hubs/${_id}`}
-          className="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          className="mt-3 inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
         >
-          View Details
+          See More
         </Link>
-
       </div>
     </div>
   );
