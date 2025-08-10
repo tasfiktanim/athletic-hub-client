@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router';
-import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/Home';
 import CreateEvent from '../pages/CreateEvent';
 import UpdateEvent from '../pages/UpdateEvent';
@@ -13,6 +12,7 @@ import Hub from '../Pages/Hub';
 import HubDetails from '../Pages/HubDetails';
 import Booking from '../Pages/Booking';
 import EventDetails from '../Pages/EventDetails';
+import MainLayout from '../Layouts/MainLayout';
 
 const router = createBrowserRouter([
   {

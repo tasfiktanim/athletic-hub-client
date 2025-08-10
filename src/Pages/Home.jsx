@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Hubs from "../components/Hubs";
 import Banner from "../components/Banner";
 import { motion } from "framer-motion";
-
+import MemberCount from "../components/MemberCount"; 
 
 const popularSports = [
   {
@@ -99,8 +99,7 @@ const Home = () => {
         <h3 className="text-2xl font-semibold mb-8 text-center">
           Popular Sports This Month
         </h3>
-        
-      
+
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           {popularSports.map((sport) => (
             <motion.span
@@ -158,6 +157,29 @@ const Home = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ✅ Member Count Section */}
+      <section className="bg-gray-50 py-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <h3 className="text-2xl font-semibold text-center mb-10">
+            Our Community in Numbers
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white shadow rounded-lg p-6 text-center">
+              <MemberCount count={1500} label="Registered Athletes" />
+            </div>
+            <div className="bg-white shadow rounded-lg p-6 text-center">
+              <MemberCount count={250} label="Events Hosted" />
+            </div>
+            <div className="bg-white shadow rounded-lg p-6 text-center">
+              <MemberCount count={50} label="Cities Covered" />
+            </div>
+            <div className="bg-white shadow rounded-lg p-6 text-center">
+              <MemberCount count={25} label="Sports Categories" />
+            </div>
+          </div>
         </div>
       </section>
     </div>
