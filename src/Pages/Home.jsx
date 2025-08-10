@@ -71,32 +71,41 @@ const Home = () => {
       <div className="text-center mt-8">
         <a
           href="/hubs"
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+          className="inline-block px-4 py-2 rounded-lg transition font-semibold"
+          style={{ backgroundColor: 'var(--btn-primary)', color: 'var(--text-primary)' }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--btn-primary-hover)')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--btn-primary)')}
         >
           See All Events
         </a>
       </div>
 
-      <section className="bg-gray-100 py-12">
+      <section className="py-12" style={{ backgroundColor: 'var(--table-bg)' }}>
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <h3 className="text-2xl font-semibold mb-6">What Athletes Say</h3>
+          <h3 className="text-2xl font-semibold mb-6" style={{ color: 'var(--text-secondary)' }}>
+            What Athletes Say
+          </h3>
           <div className="grid md:grid-cols-2 gap-6">
-            <blockquote className="bg-white p-6 rounded shadow">
+            <blockquote className="p-6 rounded shadow" style={{ backgroundColor: 'var(--dropdown-bg)', color: 'var(--text-secondary)' }}>
               "AthleticHub helped me discover local events and push my limits!
               Highly recommended."
-              <footer className="mt-4 text-sm font-semibold">— Priya, Sprinter</footer>
+              <footer className="mt-4 text-sm font-semibold" style={{ color: 'var(--text-tertiary)' }}>
+                — Priya, Sprinter
+              </footer>
             </blockquote>
-            <blockquote className="bg-white p-6 rounded shadow">
+            <blockquote className="p-6 rounded shadow" style={{ backgroundColor: 'var(--dropdown-bg)', color: 'var(--text-secondary)' }}>
               "I found my first professional swimming competition through this
               platform. Amazing experience!"
-              <footer className="mt-4 text-sm font-semibold">— Arif, Swimmer</footer>
+              <footer className="mt-4 text-sm font-semibold" style={{ color: 'var(--text-tertiary)' }}>
+                — Arif, Swimmer
+              </footer>
             </blockquote>
           </div>
         </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-12">
-        <h3 className="text-2xl font-semibold mb-8 text-center">
+        <h3 className="text-2xl font-semibold mb-8 text-center" style={{ color: 'var(--text-secondary)' }}>
           Popular Sports This Month
         </h3>
 
@@ -105,7 +114,10 @@ const Home = () => {
             <motion.span
               key={sport.id}
               whileHover={{ scale: 1.05 }}
-              className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200 transition"
+              className="px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition"
+              style={{ backgroundColor: 'var(--dropdown-bg)', color: 'var(--text-secondary)' }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--table-hover)')}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--dropdown-bg)')}
             >
               {sport.name}
             </motion.span>
@@ -121,7 +133,8 @@ const Home = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className="rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              style={{ backgroundColor: 'var(--dropdown-bg)' }}
             >
               <div className="h-48 overflow-hidden">
                 <img 
@@ -132,14 +145,19 @@ const Home = () => {
               </div>
               
               <div className="p-6">
-                <h4 className="text-xl font-bold mb-2">{sport.name}</h4>
-                <p className="text-gray-600 mb-4">{sport.description}</p>
+                <h4 className="text-xl font-bold mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  {sport.name}
+                </h4>
+                <p className="mb-4" style={{ color: 'var(--text-tertiary)' }}>
+                  {sport.description}
+                </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {sport.tags.map((tag, idx) => (
                     <span 
                       key={idx}
-                      className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                      className="px-3 py-1 rounded-full text-xs font-medium"
+                      style={{ backgroundColor: 'var(--table-bg)', color: 'var(--text-secondary)' }}
                     >
                       {tag}
                     </span>
@@ -147,10 +165,15 @@ const Home = () => {
                 </div>
                 
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-blue-600">
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                     {sport.eventsCount} upcoming events
                   </span>
-                  <button className="text-sm bg-blue-600 text-white px-4 py-1 rounded-full hover:bg-blue-700 transition">
+                  <button 
+                    className="text-sm px-4 py-1 rounded-full transition"
+                    style={{ backgroundColor: 'var(--btn-primary)', color: 'var(--text-primary)' }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--btn-primary-hover)')}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--btn-primary)')}
+                  >
                     View Events
                   </button>
                 </div>
@@ -160,23 +183,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ✅ Member Count Section */}
-      <section className="bg-gray-50 py-12">
+      {/* Member Count Section */}
+      <section className="py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-2xl font-semibold text-center mb-10">
+          <h3 className="text-2xl font-semibold text-center mb-10" style={{ color: 'var(--text-secondary)' }}>
             Our Community in Numbers
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-white shadow rounded-lg p-6 text-center">
+            <div className="shadow rounded-lg p-6 text-center" style={{ backgroundColor: 'var(--dropdown-bg)' }}>
               <MemberCount count={1500} label="Registered Athletes" />
             </div>
-            <div className="bg-white shadow rounded-lg p-6 text-center">
+            <div className="shadow rounded-lg p-6 text-center" style={{ backgroundColor: 'var(--dropdown-bg)' }}>
               <MemberCount count={250} label="Events Hosted" />
             </div>
-            <div className="bg-white shadow rounded-lg p-6 text-center">
+            <div className="shadow rounded-lg p-6 text-center" style={{ backgroundColor: 'var(--dropdown-bg)' }}>
               <MemberCount count={50} label="Cities Covered" />
             </div>
-            <div className="bg-white shadow rounded-lg p-6 text-center">
+            <div className="shadow rounded-lg p-6 text-center" style={{ backgroundColor: 'var(--dropdown-bg)' }}>
               <MemberCount count={25} label="Sports Categories" />
             </div>
           </div>
