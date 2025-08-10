@@ -1,12 +1,153 @@
- @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
- 
- @import "tailwindcss";
- @plugin "daisyui" {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+@plugin "daisyui" {
   themes: light --default, dark --prefersdark;
-  themes: light --default;
- }
+}
 
-
- * {
+* {
   font-family: "Poppins", sans-serif;
+}
+
+/* Theme-specific variables */
+[data-theme="light"] {
+  --bg-primary: #1E40AF; /* blue-700 */
+  --bg-secondary: #2563EB; /* blue-600 */
+  --text-primary: #FFFFFF;
+  --text-secondary: #1F2937; /* gray-800 */
+  --text-tertiary: #4B5563; /* gray-600 */
+  --text-hover: #FBBF24; /* yellow-400 */
+  --dropdown-bg: #FFFFFF;
+  --dropdown-text: #1F2937; /* gray-800 */
+  --dropdown-border: #D1D5DB; /* gray-300 */
+  --table-bg: #F9FAFB; /* gray-100 */
+  --table-border: #D1D5DB; /* gray-300 */
+  --table-hover: #F3F4F6; /* gray-50 */
+  --btn-create: #16A34A; /* green-600 */
+  --btn-create-hover: #15803D; /* green-700 */
+  --btn-primary: #2563EB; /* blue-600 */
+  --btn-primary-hover: #1D4ED8; /* blue-700 */
+  --btn-danger: #DC2626; /* red-600 */
+  --btn-danger-hover: #B91C1C; /* red-700 */
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1F2937; /* gray-800 */
+  --bg-secondary: #374151; /* gray-700 */
+  --text-primary: #F3F4F6; /* gray-100 */
+  --text-secondary: #D1D5DB; /* gray-300 */
+  --text-tertiary: #9CA3AF; /* gray-400 */
+  --text-hover: #FCD34D; /* yellow-300 */
+  --dropdown-bg: #374151; /* gray-700 */
+  --dropdown-text: #F3F4F6; /* gray-100 */
+  --dropdown-border: #4B5563; /* gray-600 */
+  --table-bg: #374151; /* gray-700 */
+  --table-border: #4B5563; /* gray-600 */
+  --table-hover: #4B5563; /* gray-600 */
+  --btn-create: #22C55E; /* green-500 */
+  --btn-create-hover: #16A34A; /* green-600 */
+  --btn-primary: #3B82F6; /* blue-500 */
+  --btn-primary-hover: #2563EB; /* blue-600 */
+  --btn-danger: #EF4444; /* red-500 */
+  --btn-danger-hover: #DC2626; /* red-600 */
+}
+
+/* Apply theme variables */
+nav {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+nav a:hover {
+  color: var(--text-hover);
+}
+
+nav .bg-blue-600 {
+  background-color: var(--bg-secondary);
+}
+
+nav .bg-white.text-gray-800 {
+  background-color: var(--dropdown-bg);
+  color: var(--dropdown-text);
+}
+
+nav .border-gray-300 {
+  border-color: var(--dropdown-border);
+}
+
+/* ManageEvents styles */
+.max-w-6xl {
+  background-color: var(--dropdown-bg);
+  color: var(--text-secondary);
+}
+
+.text-3xl {
+  color: var(--text-secondary);
+}
+
+.bg-gray-100 {
+  background-color: var(--table-bg);
+}
+
+.text-gray-600 {
+  color: var(--text-tertiary);
+}
+
+.border-gray-300 {
+  border-color: var(--table-border);
+}
+
+.hover\:bg-gray-50:hover {
+  background-color: var(--table-hover);
+}
+
+.bg-blue-600 {
+  background-color: var(--btn-primary);
+  color: var(--text-primary);
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.bg-green-600 {
+  background-color: var(--btn-create);
+  color: var(--text-primary);
+}
+
+.hover\:bg-green-700:hover {
+  background-color: var(--btn-create-hover);
+}
+
+.bg-red-600 {
+  background-color: var(--btn-danger);
+  color: var(--text-primary);
+}
+
+.hover\:bg-red-700:hover {
+  background-color: var(--btn-danger-hover);
+}
+
+/* SweetAlert2 overrides for dark mode */
+.swal2-popup {
+  background-color: var(--dropdown-bg) !important;
+  color: var(--dropdown-text) !important;
+}
+
+.swal2-title,
+.swal2-content {
+  color: var(--dropdown-text) !important;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure all text elements have proper contrast */
+table, th, td {
+  color: var(--text-secondary);
+}
+
+button {
+  color: var(--text-primary);
 }
